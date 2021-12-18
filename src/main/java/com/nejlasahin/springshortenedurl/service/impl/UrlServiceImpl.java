@@ -22,17 +22,22 @@ public class UrlServiceImpl implements UrlService {
     }
 
     @Override
-    public Url update(Url url, Long addressId) {
+    public Url update(Url url, Long userId) {
         return null;
     }
 
     @Override
-    public void delete(Long addressId) {
+    public void delete(Long userId, Long urlId) {
 
     }
 
     @Override
-    public List<Url> getAll() {
+    public List<Url> getAll(Long userId) {
+        return urlRepository.findAllById(userId);
+    }
+
+    @Override
+    public Url getById(Long userId, Long urlId) {
         return null;
     }
 }
