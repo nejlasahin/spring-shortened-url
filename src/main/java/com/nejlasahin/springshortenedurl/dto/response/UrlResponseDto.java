@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class UrlResponseDto {
 
     private Long id;
+
     private String shortUrl;
 }

@@ -1,7 +1,7 @@
 package com.nejlasahin.springshortenedurl.dto.converter;
 
 import com.nejlasahin.springshortenedurl.dto.request.UserRequestDto;
-import com.nejlasahin.springshortenedurl.dto.response.UserResponseDto;
+import com.nejlasahin.springshortenedurl.dto.response.LoginDto;
 import com.nejlasahin.springshortenedurl.model.User;
 
 import java.util.List;
@@ -16,13 +16,13 @@ public class UserConverter {
                 .build();
     }
 
-    public static UserResponseDto userToUserResponseDto(User user) {
-        return UserResponseDto.builder()
+    public static LoginDto userToUserResponseDto(User user) {
+        return LoginDto.builder()
                 .id(user.getId())
                 .build();
     }
 
-    public static List<UserResponseDto> urlListToUrlResponseDtoList(List<User> urlList) {
+    public static List<LoginDto> urlListToUrlResponseDtoList(List<User> urlList) {
         return urlList.stream().map(UserConverter::userToUserResponseDto).collect(Collectors.toList());
     }
 }

@@ -1,14 +1,17 @@
 package com.nejlasahin.springshortenedurl.dto.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponseDto {
+@Builder
+public class LoginDto {
 
-    private String username;
+    private Long id;
 
+    private String token;
 }
