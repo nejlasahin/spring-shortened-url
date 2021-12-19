@@ -1,14 +1,15 @@
 package com.nejlasahin.springshortenedurl.service;
 
-import com.nejlasahin.springshortenedurl.model.Url;
+import com.nejlasahin.springshortenedurl.dto.request.UrlRequestDto;
+import com.nejlasahin.springshortenedurl.dto.response.UrlResponseDto;
 
 import java.util.List;
 
 public interface UrlService {
 
-    Url save(Url url, Long userId);
-    Url update(Url url, Long userId);
+    UrlResponseDto save(UrlRequestDto urlRequestDto, Long userId);
     void delete(Long userId, Long urlId);
-    List<Url> getAll(Long userId);
-    Url getById(Long userId, Long urlId);
+    List<UrlResponseDto> getAll(Long userId);
+    UrlResponseDto getById(Long userId, Long urlId);
+    String getOriginUrl(String shortUrl);
 }

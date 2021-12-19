@@ -1,6 +1,7 @@
 package com.nejlasahin.springshortenedurl.controller;
 
-import com.nejlasahin.springshortenedurl.model.Url;
+import com.nejlasahin.springshortenedurl.dto.request.UrlRequestDto;
+import com.nejlasahin.springshortenedurl.dto.response.UrlResponseDto;
 import com.nejlasahin.springshortenedurl.service.UrlService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -24,23 +27,24 @@ public class UrlController {
         this.urlService = urlService;
     }
 
-    @GetMapping("/{shortUrl}")
-    public ResponseEntity<String> redirect(@PathVariable("shortUrl") String shortUrl){
-        return ResponseEntity.status(HttpStatus.OK).body("dd");
+    @GetMapping("/s/{shortUrl}")
+    public ResponseEntity<?> redirect(@PathVariable("shortUrl") String shortUrl){
+        String originUrl = urlService.getOriginUrl(shortUrl);
+        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).location(URI.create(originUrl)).build();
     }
 
     @PostMapping("user/{userId}/url/save")
-    public ResponseEntity<Url> save(@RequestBody Url url, @PathVariable("userId") Long userId){
-        return ResponseEntity.status(HttpStatus.OK).body(urlService.save(url, userId));
+    public ResponseEntity<UrlResponseDto> save(@RequestBody @Valid UrlRequestDto urlRequestDto, @PathVariable("userId") Long userId){
+        return ResponseEntity.status(HttpStatus.OK).body(urlService.save(urlRequestDto, userId));
     }
 
     @GetMapping("user/{userId}/url/list")
-    public ResponseEntity<List<Url>> getAll(@PathVariable("userId") Long userId){
+    public ResponseEntity<List<UrlResponseDto>> getAll(@PathVariable("userId") Long userId){
         return ResponseEntity.status(HttpStatus.OK).body(urlService.getAll(userId));
     }
 
     @GetMapping("user/{userId}/url/detail/{urlId}")
-    public ResponseEntity<Url> getById(@PathVariable("userId") Long userId, @PathVariable("urlId") Long urlId){
+    public ResponseEntity<UrlResponseDto> getById(@PathVariable("userId") Long userId, @PathVariable("urlId") Long urlId){
         return ResponseEntity.status(HttpStatus.OK).body(urlService.getById(userId, urlId));
     }
 
