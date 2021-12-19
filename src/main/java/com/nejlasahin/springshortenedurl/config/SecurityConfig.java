@@ -80,12 +80,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/urls/s/**")
-                .permitAll()
-                .antMatchers("/users/**")
-                .permitAll()
-                .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-ui.html", "/swagger-resources/configuration/security")
-                .permitAll()
+                .antMatchers(HttpMethod.GET, "/urls/s/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .antMatchers("/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**",
+                        "/swagger-resources/configuration/ui",
+                        "/swagger-ui.html",
+                        "/swagger-resources/configuration/security").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
