@@ -1,3 +1,10 @@
-# spring-shortened-url
+# Shortened Url
 
-https://progress-bar.dev/28/
+İlerleme Durumu : ![60%](https://progress-bar.dev/10)
+
+Yapılacaklar
+
+* Unit test
+* Integration Test
+* React ile Frontend 
+
