@@ -6,5 +6,6 @@ Yapılacaklar
 
 * Unit test
 * Integration Test
-* React ile Frontend 
+* React ile Frontend
+* Projeyi Dockerize Etmek 
 
