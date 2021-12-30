@@ -1,6 +1,6 @@
 # Shortened Url
 
-İlerleme Durumu : ![60%](https://progress-bar.dev/10)
+İlerleme Durumu : ![60%](https://progress-bar.dev/60)
 
 Yapılacaklar
 
