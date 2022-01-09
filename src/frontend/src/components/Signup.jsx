@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import {useState} from 'react'
+import {Link, useNavigate} from 'react-router-dom'
 import BASE_URL from '../data/base_url'
 
 function Signup() {
@@ -17,9 +17,9 @@ function Signup() {
 
     function signup(event) {
         event.preventDefault()
-        axios.post(`${BASE_URL}/auth/register`, { username, password })
+        axios.post(`${BASE_URL}/auth/register`, {username, password})
             .then((res) => {
-                navigate("../login", { replace: true })
+                navigate("../login", {replace: true})
             })
             .catch((err) => {
                 console.log(err.response)
@@ -44,21 +44,26 @@ function Signup() {
                 }
             })
     }
+
     return (
         <>
             <div className='container p-5'>
                 <h3 className='text-center'>Sign-up</h3>
-                <p className='text-center'>Do you have an account ? <Link to="/login" className='text-decoration-none text-info'> Login... </Link></p>
+                <p className='text-center'>Do you have an account ? <Link to="/login"
+                                                                          className='text-decoration-none text-info'> Login... </Link>
+                </p>
                 <form>
                     <h5 className='text-center my-3 mt-5 text-danger'>{signupError}</h5>
                     <div className="mb-3">
                         <label htmlFor="InputUsername" className="form-label">Username</label>
-                        <input onChange={(e) => setUsername(e.target.value)} type="text" className="form-control" id="InputUsername" aria-describedby="usernameHelp" />
+                        <input onChange={(e) => setUsername(e.target.value)} type="text" className="form-control"
+                               id="InputUsername" aria-describedby="usernameHelp"/>
                         <div id="usernameHelp" className="form-text text-danger">{usernameError}</div>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="InputPassword" className="form-label">Password</label>
-                        <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control" id="InputPassword" />
+                        <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control"
+                               id="InputPassword"/>
                         <div id="passwordHelp" className="form-text text-danger">{passwordError}</div>
                     </div>
                     <button onClick={signup} type="submit" className="btn btn-dark">Sign-up</button>

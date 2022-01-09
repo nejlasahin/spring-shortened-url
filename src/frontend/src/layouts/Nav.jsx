@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 function Nav() {
 
@@ -8,14 +8,16 @@ function Nav() {
         localStorage.removeItem("token")
         localStorage.removeItem("userId")
         localStorage.removeItem("username")
-        navigate("../", { replace: true })
+        navigate("../", {replace: true})
     }
 
     return (
         <>
             <div>
-                <header className="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-                    <Link to="/" className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none fw-bold">
+                <header
+                    className="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                    <Link to="/"
+                          className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none fw-bold">
                         Shortened Url
                     </Link>
 
@@ -42,8 +44,10 @@ function Nav() {
                             </div>
                             :
                             <div className="col-md-3 text-end">
-                                <Link to="/url-list" role="button" className="btn btn-outline-dark me-2">Welcome {localStorage.getItem("username")}</Link>
-                                <button onClick={logout} role="button" className="btn btn-outline-danger me-2">Logout</button>
+                                <Link to="/url-list" role="button"
+                                      className="btn btn-outline-dark me-2">Welcome {localStorage.getItem("username")}</Link>
+                                <button onClick={logout} role="button" className="btn btn-outline-danger me-2">Logout
+                                </button>
                             </div>
 
                     }
@@ -52,4 +56,5 @@ function Nav() {
         </>
     )
 }
+
 export default Nav;

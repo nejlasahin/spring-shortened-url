@@ -10,7 +10,10 @@ import java.util.Optional;
 public interface UserService {
 
     RegisterDto save(UserRequestDto userRequestDto);
+
     void changePassword(Long userId, UserPasswordDto userPasswordDto);
+
     void delete(Long userId);
+
     Optional<User> getByUsername(String username);
 }

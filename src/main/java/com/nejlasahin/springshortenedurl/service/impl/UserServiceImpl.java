@@ -26,7 +26,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public RegisterDto save(UserRequestDto userRequestDto) {
         userRepository.findByUsername(userRequestDto.getUsername())
-                .ifPresent(s -> { throw new UsernameIsAlreadyExistException(String.format("Username with %s is already exist.", userRequestDto.getUsername())); } );
+                .ifPresent(s -> {
+                    throw new UsernameIsAlreadyExistException(String.format("Username with %s is already exist.", userRequestDto.getUsername()));
+                });
         User user = userRepository.save(UserConverter.userRequestDtoToUser(userRequestDto));
         return new RegisterDto(user.getId());
     }

@@ -68,7 +68,7 @@ public class UrlServiceImpl implements UrlService {
         return url.getOriginUrl();
     }
 
-    private String encodeUrl(String url) {
+    public String encodeUrl(String url) {
         String encodedUrl = "";
         LocalDateTime time = LocalDateTime.now();
         encodedUrl = Hashing.adler32()
@@ -76,6 +76,6 @@ public class UrlServiceImpl implements UrlService {
                 .toString();
         urlRepository.findByShortUrl(encodedUrl)
                 .ifPresent(resultUrl -> encodeUrl(resultUrl.getShortUrl().concat(time.toString())));
-        return  encodedUrl;
+        return encodedUrl;
     }
 }
