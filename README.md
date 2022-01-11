@@ -1,11 +1,10 @@
 # Shortened Url
 
-İlerleme Durumu : ![60%](https://progress-bar.dev/60)
+İlerleme Durumu : ![70%](https://progress-bar.dev/70)
 
 Yapılacaklar
 
 * Unit test
 * Integration Test
-* React ile Frontend
 * Projeyi Dockerize Etmek 
 
