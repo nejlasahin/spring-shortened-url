@@ -22,21 +22,23 @@ public class UrlServiceImpl implements UrlService {
 
     private final UrlRepository urlRepository;
     private final UserRepository userRepository;
+    private final UrlConverter urlConverter;
 
-    public UrlServiceImpl(UrlRepository urlRepository, UserRepository userRepository) {
+    public UrlServiceImpl(UrlRepository urlRepository, UserRepository userRepository, UrlConverter urlConverter) {
         this.urlRepository = urlRepository;
         this.userRepository = userRepository;
+        this.urlConverter = urlConverter;
     }
 
     @Override
     public UrlResponseDto save(UrlRequestDto urlRequestDto, Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(String.format("User with id %d not found.", userId)));
         String shortUrl = encodeUrl(urlRequestDto.getOriginUrl());
-        Url url = UrlConverter.urlRequestDtoToUrl(urlRequestDto);
+        Url url = urlConverter.urlRequestDtoToUrl(urlRequestDto);
         url.setShortUrl(shortUrl);
         url.setUser(user);
         urlRepository.save(url);
-        return UrlConverter.urlToUrlResponseDto(url);
+        return urlConverter.urlToUrlResponseDto(url);
     }
 
     @Override
@@ -50,7 +52,7 @@ public class UrlServiceImpl implements UrlService {
     @Override
     public List<UrlResponseDto> getAll(Long userId) {
         userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(String.format("User with id %d not found.", userId)));
-        return UrlConverter.urlListToUrlResponseDtoList(urlRepository.findAllById(userId));
+        return urlConverter.urlListToUrlResponseDtoList(urlRepository.findAllById(userId));
     }
 
     @Override
@@ -58,7 +60,7 @@ public class UrlServiceImpl implements UrlService {
         userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(String.format("User with id %d not found.", userId)));
         Url url = urlRepository.findByUserIdAndUrlId(userId, urlId)
                 .orElseThrow(() -> new UrlNotFoundException(String.format("Url with id %d not found.", urlId)));
-        return UrlConverter.urlToUrlResponseDto(url);
+        return urlConverter.urlToUrlResponseDto(url);
     }
 
     @Override

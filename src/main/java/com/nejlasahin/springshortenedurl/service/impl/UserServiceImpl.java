@@ -18,9 +18,11 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserConverter userConverter;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserConverter userConverter) {
         this.userRepository = userRepository;
+        this.userConverter = userConverter;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class UserServiceImpl implements UserService {
                 .ifPresent(s -> {
                     throw new UsernameIsAlreadyExistException(String.format("Username with %s is already exist.", userRequestDto.getUsername()));
                 });
-        User user = userRepository.save(UserConverter.userRequestDtoToUser(userRequestDto));
+        User user = userRepository.save(userConverter.userRequestDtoToUser(userRequestDto));
         return new RegisterDto(user.getId());
     }
 

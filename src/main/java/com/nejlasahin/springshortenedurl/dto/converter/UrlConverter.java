@@ -11,20 +11,20 @@ import java.util.stream.Collectors;
 @Component
 public class UrlConverter {
 
-    public static Url urlRequestDtoToUrl(UrlRequestDto urlRequestDto) {
+    public Url urlRequestDtoToUrl(UrlRequestDto urlRequestDto) {
         return Url.builder()
                 .originUrl(urlRequestDto.getOriginUrl())
                 .build();
     }
 
-    public static UrlResponseDto urlToUrlResponseDto(Url url) {
+    public UrlResponseDto urlToUrlResponseDto(Url url) {
         return UrlResponseDto.builder()
                 .id(url.getId())
                 .shortUrl(url.getShortUrl())
                 .build();
     }
 
-    public static List<UrlResponseDto> urlListToUrlResponseDtoList(List<Url> urlList) {
-        return urlList.stream().map(UrlConverter::urlToUrlResponseDto).collect(Collectors.toList());
+    public List<UrlResponseDto> urlListToUrlResponseDtoList(List<Url> urlList) {
+        return urlList.stream().map(url -> urlToUrlResponseDto(url)).collect(Collectors.toList());
     }
 }
