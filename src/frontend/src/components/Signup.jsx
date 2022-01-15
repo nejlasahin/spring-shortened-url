@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import BASE_URL from '../data/base_url'
 
 function Signup() {
 
@@ -17,7 +16,7 @@ function Signup() {
 
     function signup(event) {
         event.preventDefault()
-        axios.post(`${BASE_URL}/auth/register`, {username, password})
+        axios.post(`/auth/register`, {username, password})
             .then((res) => {
                 navigate("../login", {replace: true})
             })

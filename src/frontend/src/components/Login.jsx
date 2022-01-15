@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import BASE_URL from '../data/base_url'
 
 function Login() {
 
@@ -17,7 +16,7 @@ function Login() {
 
     function login(event) {
         event.preventDefault()
-        axios.post(`${BASE_URL}/auth/login`, {username, password})
+        axios.post(`/auth/login`, {username, password})
             .then((res) => {
                 localStorage.setItem("token", res.data.token)
                 localStorage.setItem("userId", res.data.id)
