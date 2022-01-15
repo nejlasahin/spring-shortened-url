@@ -20,7 +20,7 @@ public class UserRepositoryTest {
 
     @Test
     public void shouldCheckWhenUserUsernameIsExists() {
-        User user = User.builder().id(1L).username("testuser").password("testpass").build();
+        User user = User.builder().id(2L).username("testuser").password("testpass").build();
         userRepository.save(user);
 
         boolean expected = userRepository.existsById(user.getId());
@@ -30,7 +30,7 @@ public class UserRepositoryTest {
 
     @Test
     public void shouldCheckWhenUserUsernameIsNotExists() {
-        boolean expected = userRepository.existsById(1L);
+        boolean expected = userRepository.existsById(2L);
 
         assertFalse(expected);
     }

@@ -22,6 +22,7 @@ public class UrlRepositoryTest {
     @AfterEach
     public void tearDown(){
         urlRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
