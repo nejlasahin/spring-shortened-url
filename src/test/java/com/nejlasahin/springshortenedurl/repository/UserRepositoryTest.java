@@ -1,5 +1,6 @@
 package com.nejlasahin.springshortenedurl.repository;
 
+import com.nejlasahin.springshortenedurl.model.Url;
 import com.nejlasahin.springshortenedurl.model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -13,23 +14,32 @@ public class UserRepositoryTest {
     @Autowired
     UserRepository userRepository;
 
-    @AfterEach
-    public void tearDown(){
-        userRepository.deleteAll();
-    }
-
     @Test
-    public void shouldCheckWhenUserUsernameIsExists() {
-        User user = User.builder().id(2L).username("testuser").password("testpass").build();
-        userRepository.save(user);
-
-        boolean expected = userRepository.existsById(user.getId());
+    public void testUserExistsById() {
+        boolean expected = userRepository.existsById(1L);
 
         assertTrue(expected);
     }
 
     @Test
-    public void shouldCheckWhenUserUsernameIsNotExists() {
+    public void testUserNotExistsById() {
+        boolean expected = userRepository.existsById(5L);
+
+        assertFalse(expected);
+    }
+
+    @Test
+    public void testUserGetById() {
+        User expected = userRepository.getById(1L);
+
+        assertEquals(expected.getId(), 1L);
+        assertEquals(expected.getUsername(), "username1");
+        assertEquals(expected.getPassword(), "password1");
+    }
+
+    @Test
+    public void testUserDeleteById() {
+        userRepository.deleteById(2L);
         boolean expected = userRepository.existsById(2L);
 
         assertFalse(expected);

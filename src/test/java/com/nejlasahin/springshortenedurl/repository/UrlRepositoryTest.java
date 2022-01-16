@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,21 +29,44 @@ public class UrlRepositoryTest {
     }
 
     @Test
-    public void shouldCheckWhenUrlIdIsExists() {
-        User user = User.builder().id(1L).username("testuser").password("testpass").build();
-        userRepository.save(user);
-        Url url = Url.builder().id(1L).shortUrl("test").originUrl("www.test.com").user(user).build();
-        urlRepository.save(url);
-
-        boolean expected = urlRepository.existsById(url.getId());
+    public void testUrlExistsById() {
+        boolean expected = urlRepository.existsById(1L);
 
         assertTrue(expected);
     }
 
     @Test
-    public void shouldCheckWhenUrlIdIsNotExists() {
+    public void testUrlNotExistsById() {
+        boolean expected = urlRepository.existsById(10L);
+
+        assertFalse(expected);
+    }
+
+    @Test
+    public void testUrlGetById() {
+        Url expected = urlRepository.getById(1L);
+
+        assertEquals(expected.getId(), 1L);
+        assertEquals(expected.getOriginUrl(), "origin1");
+        assertEquals(expected.getShortUrl(), "short1");
+    }
+
+    @Test
+    public void testUrlDeleteById() {
+        urlRepository.deleteById(1L);
         boolean expected = urlRepository.existsById(1L);
 
         assertFalse(expected);
+    }
+
+    @Test
+    public void testUrlFindAllById() {
+        List<Url> expected = urlRepository.findAllById(1L);
+
+        assertEquals(expected.size(), 3);
+        assertEquals(expected.get(0).getId(), 1);
+        assertEquals(expected.get(1).getId(), 2);
+        assertEquals(expected.get(2).getId(), 3);
+
     }
 }
