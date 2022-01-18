@@ -55,8 +55,6 @@ $ docker-compose up
 
 ## MIT License
 
-MIT License
-
 Copyright (c) 2021 Nejla Şahin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
